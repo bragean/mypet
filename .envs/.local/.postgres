@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=mypet
+POSTGRES_USER=yohGTVARICjKBhVGHbIihXvRDMTRjmjx
+POSTGRES_PASSWORD=KpJch9ShH7nFKg1lQYVexjcYMkRBKDvoRIuydHucMvnY8DmabE36bHvO0KxKNGrG
