@@ -1,9 +1,9 @@
 
 from typing import ClassVar
-
+import uuid
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField
-from django.db.models import EmailField
+from django.db.models import CharField, Model, ForeignKey, OneToOneField, UUIDField
+from django.db.models import EmailField, CASCADE, BooleanField, ImageField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -18,6 +18,7 @@ class User(AbstractUser):
     """
 
     # First and last name do not cover name patterns around the globe
+    id = UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
     name = CharField(_("Name of User"), blank=True, max_length=255)
     first_name = None  # type: ignore[assignment]
     last_name = None  # type: ignore[assignment]
@@ -37,3 +38,13 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"pk": self.id})
+
+
+class UserProfile(Model):
+    user = OneToOneField(User, on_delete=CASCADE)
+    identifier = CharField(max_length=15)
+    address = CharField(max_length=255, blank=True)
+    phone = CharField(max_length=15)
+    image = ImageField(upload_to="user_profile/", null=True, blank=True)
+    is_phone_verified = BooleanField(default=False)
+    is_email_verified = BooleanField(default=False)
