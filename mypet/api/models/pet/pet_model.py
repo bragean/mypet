@@ -19,7 +19,7 @@ class Breed(Base):
     name = CharField(max_length=20)
     image = ImageField(upload_to="media/breed/", null=True, blank=True)
     pet_type = ForeignKey(PetType, on_delete=CASCADE)
-    
+
     def __str__(self):
         return self.name
 
