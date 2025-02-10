@@ -2,7 +2,7 @@ from django.conf import settings
 from rest_framework.routers import DefaultRouter
 from rest_framework.routers import SimpleRouter
 
-from mypet.users.api.views import UserViewSet
+from mypet.users.api.views import UserViewSet, UserPublicViewSet
 from mypet.api.views import (
     CoordinateViewSet,
     CountryViewSet,
@@ -22,6 +22,7 @@ from mypet.api.views import (
 router = DefaultRouter() if settings.DEBUG else SimpleRouter()
 
 router.register("users", UserViewSet)
+router.register("users_public", UserPublicViewSet, basename="user_public")
 router.register("coordinate", CoordinateViewSet)
 router.register("country", CountryViewSet)
 router.register("department", DepartmentViewSet)

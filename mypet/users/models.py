@@ -1,4 +1,3 @@
-
 from typing import ClassVar
 import uuid
 from django.contrib.auth.models import AbstractUser
@@ -20,8 +19,8 @@ class User(AbstractUser):
     # First and last name do not cover name patterns around the globe
     id = UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
     name = CharField(_("Name of User"), blank=True, max_length=255)
-    first_name = None  # type: ignore[assignment]
-    last_name = None  # type: ignore[assignment]
+    first_name = CharField(_("First Name of User"), blank=True, max_length=255)
+    last_name = CharField(_("Last Name of User"), blank=True, max_length=255)
     email = EmailField(_("email address"), unique=True)
     username = None  # type: ignore[assignment]
 
@@ -41,6 +40,7 @@ class User(AbstractUser):
 
 
 class UserProfile(Model):
+    id = UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = OneToOneField(User, on_delete=CASCADE)
     identifier = CharField(max_length=15)
     address = CharField(max_length=255, blank=True)

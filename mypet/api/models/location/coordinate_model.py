@@ -1,5 +1,5 @@
 from ..base.base_model import Base
-from django.db.models import Model, DecimalField
+from django.db.models import DecimalField
 
 
 class Coordinate(Base):

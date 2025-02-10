@@ -13,6 +13,7 @@ from .models import (
     TimeZone
 )
 
+from mypet.users.models import UserProfile
 
 admin.site.register(Coordinate)
 admin.site.register(Point)
@@ -27,3 +28,5 @@ admin.site.register(Department)
 admin.site.register(City)
 admin.site.register(District)
 admin.site.register(TimeZone)
+
+admin.site.register(UserProfile)
