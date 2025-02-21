@@ -45,5 +45,5 @@ class UserPublicViewSet(ViewSet):
     permission_classes  = [AllowAny]
 
     def create(self, request):
-        user = UserService.create(data=request.data)
+        user = UserService.create_user_with_profile(data=request.data)
         return Response(user, status=status.HTTP_201_CREATED)

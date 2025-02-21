@@ -42,9 +42,9 @@ class User(AbstractUser):
 class UserProfile(Model):
     id = UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = OneToOneField(User, on_delete=CASCADE)
-    identifier = CharField(max_length=15)
+    identifier = CharField(max_length=15, blank=True)
     address = CharField(max_length=255, blank=True)
-    phone = CharField(max_length=15)
+    phone = CharField(max_length=15, blank=True)
     image = ImageField(upload_to="user_profile/", null=True, blank=True)
     is_phone_verified = BooleanField(default=False)
     is_email_verified = BooleanField(default=False)
