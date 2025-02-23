@@ -21,7 +21,7 @@ from mypet.api.views import (
 
 router = DefaultRouter() if settings.DEBUG else SimpleRouter()
 
-router.register("users", UserViewSet)
+router.register("users", UserViewSet, basename="users")
 router.register("users_public", UserPublicViewSet, basename="user_public")
 router.register("coordinate", CoordinateViewSet)
 router.register("country", CountryViewSet)
