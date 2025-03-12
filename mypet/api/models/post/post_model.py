@@ -1,4 +1,12 @@
-from django.db.models import CharField, ImageField, ForeignKey, CASCADE, SET_NULL
+from django.db.models import (
+    CharField,
+    ImageField,
+    ForeignKey,
+    CASCADE,
+    SET_NULL,
+    DateField,
+    TimeField,
+)
 from ..base.base_model import Base
 from ..pet.pet_model import Pet
 from ..location.location_model import District
@@ -11,6 +19,9 @@ class Post(Base):
     pet = ForeignKey(Pet, on_delete=CASCADE)
     district = ForeignKey(District, on_delete=SET_NULL, null=True)
     point = ForeignKey(Point, on_delete=SET_NULL, null=True)
+    contact_number = CharField(max_length=20, blank=True)
+    date = DateField(null=True)
+    time = TimeField(null=True)
 
 
 class PostImage(Base):
