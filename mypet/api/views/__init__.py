@@ -11,3 +11,5 @@ from .location.point_view import PointViewSet
 from .pet.pet_view import PetTypeViewSet, BreedViewSet, PetViewSet, PetFeaturesViewSet
 
 from .post.post_view import PostViewSet, PostImageViewSet
+from .post.lost_view import LostViewSet
+from .post.sighting_view import SightingViewSet
