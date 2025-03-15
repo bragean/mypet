@@ -13,7 +13,7 @@ from mypet.users.models import User, UserProfile
 class UserProfileSerializer(ModelSerializer[UserProfile]):
     class Meta:
         model = UserProfile
-        exclude = ["is_email_verified", "is_phone_verified", "user"]
+        exclude = ["is_email_verified", "is_phone_verified"]
 
 
 class UserSerializer(Serializer):
