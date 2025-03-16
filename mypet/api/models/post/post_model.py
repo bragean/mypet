@@ -11,9 +11,11 @@ from ..base.base_model import Base
 from ..pet.pet_model import Pet
 from ..location.location_model import District
 from ..location.point_model import Point
+from mypet.users.models import User
 
 
 class Post(Base):
+    owner = ForeignKey(User, on_delete=CASCADE)
     title = CharField(max_length=100)
     description = CharField(max_length=255)
     pet = ForeignKey(Pet, on_delete=CASCADE)
