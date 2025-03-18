@@ -27,5 +27,6 @@ class Post(Base):
 
 
 class PostImage(Base):
+    post = ForeignKey(Post, on_delete=CASCADE)
     name = CharField(max_length=32, blank=True)
     image = ImageField(upload_to="post/", null=True, blank=True)
