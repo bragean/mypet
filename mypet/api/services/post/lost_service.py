@@ -4,6 +4,7 @@ from mypet.api.serializers import (
     LostImageSerializer,
     PetSerializer,
     PostImageSerializer,
+    PointSerializer
 )
 
 
@@ -33,12 +34,15 @@ class LostService:
         lost_list_serializer = []
         for lost_instance in lost_instance_list:
             pet_data = None
+            point_data = None
             images = []
             if lost_instance.pet is None:
                 pet_data = PetSerializer(lost_instance.pet).data
             if LostService.has_images(lost_instance.id):
                 post_images_list = LostService.get_images(lost_instance.id)
                 images = PostImageSerializer(post_images_list, many=True).data
+            if lost_instance.point is not None:
+                point_data = PointSerializer(lost_instance.point).data
 
             lost_list_serializer.append(
                 {
@@ -57,7 +61,7 @@ class LostService:
                         if lost_instance.district is not None
                         else ""
                     ),
-                    "point": lost_instance.point,
+                    "point": point_data,
                     "contact_number": lost_instance.contact_number,
                     "date": lost_instance.date,
                     "time": lost_instance.time,

@@ -5,6 +5,7 @@ from django.db.models import (
     CASCADE,
 )
 from ..base.base_model import Base
+from mypet.users.models import User
 
 
 class PetType(Base):
@@ -25,6 +26,7 @@ class Breed(Base):
 
 
 class Pet(Base):
+    user = ForeignKey(User, on_delete=CASCADE)
     name = CharField(max_length=20)
     description = CharField(max_length=255)
     color = CharField(max_length=255)
