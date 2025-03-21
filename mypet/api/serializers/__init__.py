@@ -17,5 +17,5 @@ from .pet.pet_serializer import (
 )
 
 from .post.post_serializer import PostSerializer, PostImageSerializer
-from .post.lost_serializer import LostSerializer
+from .post.lost_serializer import LostSerializer, LostImageSerializer
 from .post.sighting_serializer import SightingSerializer

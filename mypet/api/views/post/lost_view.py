@@ -14,5 +14,5 @@ class LostViewSet(ModelViewSet):
 
     def list(self, request):
         user = request.user.id
-        lost_list_data = LostService.list(user=user)
+        lost_list_data = LostService.list_with_images(user=user)
         return Response(lost_list_data, status=status.HTTP_200_OK)

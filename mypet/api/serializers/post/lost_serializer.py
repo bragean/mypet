@@ -1,8 +1,34 @@
 from mypet.api.models import Lost
-from rest_framework.serializers import ModelSerializer
+from .post_serializer import PostImageSerializer
+from ..pet.pet_serializer import PetSerializer
+from rest_framework.serializers import (
+    Serializer,
+    ModelSerializer,
+    CharField,
+    UUIDField,
+    EmailField,
+    PrimaryKeyRelatedField,
+    TimeField,
+    DateField,
+)
 
 
 class LostSerializer(ModelSerializer):
     class Meta:
         model = Lost
         exclude = ["created", "modified", "created_by", "modified_by", "is_active"]
+
+
+class LostImageSerializer(Serializer):
+    id = UUIDField(read_only=True)
+    owner = UUIDField(read_only=True)
+    title = CharField(max_length=100)
+    description = CharField(max_length=255)
+    district_id = UUIDField(read_only=True)
+    district_name = CharField(max_length=50)
+    point = CharField(max_length=32)
+    contact_number = CharField(max_length=20, allow_blank=True)
+    date = DateField(allow_null=True)
+    time = TimeField(allow_null=True)
+    pet = PetSerializer(read_only=True, allow_null=True)
+    images = PostImageSerializer(read_only=True, many=True, allow_null=True)
