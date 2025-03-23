@@ -37,7 +37,7 @@ class LostImageSerializer(Serializer):
     owner = UUIDField(read_only=True)
     title = CharField(max_length=100)
     description = CharField(max_length=255)
-    district_id = UUIDField(read_only=True)
+    district = UUIDField(read_only=True)
     district_name = CharField(max_length=50)
     contact_number = CharField(max_length=20, allow_blank=True)
     date = DateField(allow_null=True)

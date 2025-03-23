@@ -63,7 +63,7 @@ class LostService:
                 {
                     "id": lost_instance.id,
                     "owner": lost_instance.owner.id,
-                    "owner_email": lost_instance.owner.email,
+                    "owner_name": lost_instance.owner.name,
                     "title": lost_instance.title,
                     "description": lost_instance.description,
                     "district": (
