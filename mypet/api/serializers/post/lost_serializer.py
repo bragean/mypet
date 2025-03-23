@@ -20,6 +20,18 @@ class LostSerializer(ModelSerializer):
         exclude = ["created", "modified", "created_by", "modified_by", "is_active"]
 
 
+class LostCreateSerializer(Serializer):
+    title = CharField(max_length=100)
+    description = CharField(max_length=255)
+    contact_number = CharField(max_length=20, allow_blank=True)
+    date = DateField(allow_null=True)
+    time = TimeField(allow_null=True)
+    district = UUIDField()
+    pet = UUIDField()
+    lat = CharField(max_length=32, allow_blank=True)
+    lon = CharField(max_length=32, allow_blank=True)
+
+
 class LostImageSerializer(Serializer):
     id = UUIDField(read_only=True)
     owner = UUIDField(read_only=True)

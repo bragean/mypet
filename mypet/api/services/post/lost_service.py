@@ -4,11 +4,26 @@ from mypet.api.serializers import (
     LostImageSerializer,
     PetSerializer,
     PostImageSerializer,
-    PointSerializer
+    PointSerializer,
 )
+from ..location.point_service import PointService
 
 
 class LostService:
+
+    def create(data):
+        lost_serializer = LostSerializer(data=data)
+        lost_serializer.is_valid(raise_exception=True)
+        lost_serializer.save()
+        return lost_serializer.data
+
+    def create_complete(data, user):
+        data["user"] = user
+        data["owner"] = user
+        point_data = PointService.create(data=data)
+        data["point"] = point_data["id"]
+        print(data)
+        return LostService.create(data)
 
     def list(user):
         lost_instance_list = Lost.objects.filter(owner=user, is_active=True)

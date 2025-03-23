@@ -16,3 +16,8 @@ class LostViewSet(ModelViewSet):
         user = request.user.id
         lost_list_data = LostService.list_with_images(user=user)
         return Response(lost_list_data, status=status.HTTP_200_OK)
+
+    def create(self, request):
+        user = request.user.id
+        lost_data = LostService.create_complete(request.data, user)
+        return Response(lost_data, status=status.HTTP_201_CREATED)

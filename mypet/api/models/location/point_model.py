@@ -6,7 +6,7 @@ from django.db.models import Model, OneToOneField, CASCADE, CharField, ForeignKe
 
 class Point(Base):
     user = ForeignKey(User, on_delete=CASCADE)
-    name = CharField(max_length=50)
+    name = CharField(max_length=50, blank=True)
     description = CharField(max_length=255, blank=True)
     lat = DecimalField(max_digits=9, decimal_places=6)
     long = DecimalField(max_digits=9, decimal_places=6)
