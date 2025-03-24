@@ -39,7 +39,7 @@ router.register("pet_features", PetFeaturesViewSet)
 router.register("post", PostViewSet)
 router.register("post_image", PostImageViewSet)
 router.register("sighting", SightingViewSet)
-router.register("lost", LostViewSet)
+router.register("lost", LostViewSet, basename="lost")
 
 app_name = "api"
 urlpatterns = router.urls
