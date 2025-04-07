@@ -12,7 +12,7 @@ class LostViewSet(ViewSet):
 
     def list(self, request):
         user = request.user.id
-        lost_list_data = LostService.list_complete(user=user)
+        lost_list_data = LostService.list_resume(user=user)
         return Response(lost_list_data, status=status.HTTP_200_OK)
 
     def create(self, request):

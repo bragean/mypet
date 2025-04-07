@@ -1,6 +1,6 @@
 from mypet.api.models import Lost
 from .post_serializer import PostImageSerializer
-from ..pet.pet_serializer import PetSerializer
+from ..pet.pet_serializer import PetSerializer, PetStateSerializer
 from ..location.point_model import PointSerializer
 from rest_framework.serializers import (
     Serializer,
@@ -11,6 +11,8 @@ from rest_framework.serializers import (
     PrimaryKeyRelatedField,
     TimeField,
     DateField,
+    BooleanField,
+    IntegerField,
 )
 
 
@@ -45,3 +47,17 @@ class LostImageSerializer(Serializer):
     pet = PetSerializer(read_only=True, allow_null=True)
     point = PointSerializer(read_only=True, allow_null=True)
     images = PostImageSerializer(read_only=True, many=True, allow_null=True)
+
+
+class LostListSerializer(Serializer):
+    id = UUIDField(read_only=True)
+    description = CharField(max_length=255)
+    district = UUIDField(read_only=True)
+    district_name = CharField(max_length=50)
+    date = DateField(allow_null=True)
+    has_reward = BooleanField()
+    reward = IntegerField()
+    pet_type_name = CharField()
+    pet_name = CharField(max_length=20)
+    pet_image = CharField()
+    pet_state = PetStateSerializer(read_only=True)

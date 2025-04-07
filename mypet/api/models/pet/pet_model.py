@@ -3,6 +3,8 @@ from django.db.models import (
     ImageField,
     ForeignKey,
     CASCADE,
+    BooleanField,
+    PositiveIntegerField,
 )
 from ..base.base_model import Base
 from mypet.users.models import User
@@ -38,6 +40,8 @@ class Pet(Base):
     color = CharField(max_length=255)
     breed = ForeignKey(Breed, on_delete=CASCADE)
     pet_state = ForeignKey(PetState, on_delete=CASCADE)
+    reward = PositiveIntegerField(default=0)
+    has_reward = BooleanField(default=False)
 
     def __str__(self):
         return self.name

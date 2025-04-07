@@ -5,6 +5,7 @@ from mypet.api.serializers import (
     PetSerializer,
     PostImageSerializer,
     PointSerializer,
+    PetStateSerializer,
 )
 from ..location.point_service import PointService
 from ..pet.pet_service import PetService
@@ -15,6 +16,45 @@ class LostService:
         lost_instance = Lost.objects.get(id=id)
         lost_serializer = LostSerializer(lost_instance)
         return lost_serializer.data
+
+    def get_resume(id):
+        lost_instance = Lost.objects.get(id=id)
+        pet_image = ""
+        pet_name = ""
+        pet_type_name = ""
+        has_reward = False
+        reward = 0
+        pet_state = None
+        if LostService.has_images(lost_instance.id):
+            post_image_instance = LostService.get_main_image(lost_instance.id)
+            pet_image = post_image_instance.image.url
+        if lost_instance.pet is not None:
+            pet_name = lost_instance.pet.name
+            pet_type_name = lost_instance.pet.breed.pet_type.name
+            has_reward = lost_instance.pet.has_reward
+            reward = lost_instance.pet.reward
+            pet_state = PetStateSerializer(lost_instance.pet.pet_state).data
+
+        lost_data = {
+            "id": lost_instance.id,
+            "title": lost_instance.title,
+            "description": lost_instance.description,
+            "district": (
+                None if lost_instance.district is None else lost_instance.district.id
+            ),
+            "district_name": (
+                "" if lost_instance.district is None else lost_instance.district.name
+            ),
+  
+            "date": lost_instance.date,
+            "pet_name": pet_name,
+            "pet_type_name": pet_type_name,
+            "has_reward": has_reward,
+            "reward": reward,
+            "pet_state": pet_state,
+            "pet_image": pet_image,
+        }
+        return lost_data
 
     def get_complete(id):
         lost_instance = Lost.objects.get(id=id)
@@ -75,8 +115,8 @@ class LostService:
     def update_complete(data, id):
         # update_point
         PointService.update(data["point"], data["point"]["id"])
-        del(data["point"])
-        del(data["pet"])
+        del data["point"]
+        del data["pet"]
         LostService.update(data, id)
         return LostService.get_complete(id)
 
@@ -98,12 +138,23 @@ class LostService:
     def get_images(id):
         return PostImage.objects.filter(post=id)
 
+    def get_main_image(id):
+        return PostImage.objects.filter(post=id).first()
+
     def list_complete(user):
         lost_instance_list = Lost.objects.filter(owner=user, is_active=True)
         lost_list_data = []
         for lost_instance in lost_instance_list:
-            print(lost_instance)
             lost_data = LostService.get_complete(lost_instance.id)
+            lost_list_data.append(lost_data)
+
+        return lost_list_data
+    
+    def list_resume(user):
+        lost_instance_list = Lost.objects.filter(owner=user, is_active=True)
+        lost_list_data = []
+        for lost_instance in lost_instance_list:
+            lost_data = LostService.get_resume(lost_instance.id)
             lost_list_data.append(lost_data)
 
         return lost_list_data

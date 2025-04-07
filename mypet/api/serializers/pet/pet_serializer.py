@@ -1,4 +1,4 @@
-from mypet.api.models import PetType, Breed, Pet, PetFeatures
+from mypet.api.models import PetType, Breed, Pet, PetFeatures, PetState
 from rest_framework.serializers import ModelSerializer
 from rest_framework.serializers import (
     Serializer,
@@ -33,6 +33,12 @@ class PetSerializer(ModelSerializer):
 class PetFeaturesSerializer(ModelSerializer):
     class Meta:
         model = PetFeatures
+        exclude = ["created", "modified", "created_by", "modified_by", "is_active"]
+
+
+class PetStateSerializer(ModelSerializer):
+    class Meta:
+        model = PetState
         exclude = ["created", "modified", "created_by", "modified_by", "is_active"]
 
 
