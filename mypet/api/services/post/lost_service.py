@@ -76,6 +76,7 @@ class LostService:
         # update_point
         PointService.update(data["point"], data["point"]["id"])
         del(data["point"])
+        del(data["pet"])
         LostService.update(data, id)
         return LostService.get_complete(id)
 
