@@ -25,12 +25,19 @@ class Breed(Base):
         return self.name
 
 
+class PetState(Base):
+    name = CharField(max_length=20, unique=True)
+    color = CharField(max_length=20)
+    code = CharField(max_length=20, unique=20)
+
+
 class Pet(Base):
     user = ForeignKey(User, on_delete=CASCADE)
     name = CharField(max_length=20)
     description = CharField(max_length=255)
     color = CharField(max_length=255)
     breed = ForeignKey(Breed, on_delete=CASCADE)
+    pet_state = ForeignKey(PetState, on_delete=CASCADE)
 
     def __str__(self):
         return self.name
