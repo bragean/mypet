@@ -26,8 +26,9 @@ class LostService:
         reward = 0
         pet_state = None
         if LostService.has_images(lost_instance.id):
-            post_image_instance = LostService.get_main_image(lost_instance.id)
-            pet_image = post_image_instance.image.url
+            pet_image = LostService.get_main_image(lost_instance.id)
+            print(type(pet_image))
+
         if lost_instance.pet is not None:
             pet_name = lost_instance.pet.name
             pet_type_name = lost_instance.pet.breed.pet_type.name
@@ -45,7 +46,6 @@ class LostService:
             "district_name": (
                 "" if lost_instance.district is None else lost_instance.district.name
             ),
-  
             "date": lost_instance.date,
             "pet_name": pet_name,
             "pet_type_name": pet_type_name,
@@ -139,7 +139,8 @@ class LostService:
         return PostImage.objects.filter(post=id)
 
     def get_main_image(id):
-        return PostImage.objects.filter(post=id).first()
+        post_instance = PostImage.objects.filter(post=id).first()
+        return post_instance.image.url
 
     def list_complete(user):
         lost_instance_list = Lost.objects.filter(owner=user, is_active=True)
@@ -149,7 +150,7 @@ class LostService:
             lost_list_data.append(lost_data)
 
         return lost_list_data
-    
+
     def list_resume(user):
         lost_instance_list = Lost.objects.filter(owner=user, is_active=True)
         lost_list_data = []
