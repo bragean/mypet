@@ -85,3 +85,6 @@ See detailed [cookiecutter-django Docker documentation](http://cookiecutter-djan
 docker-compose -f local.yml build
 docker-compose -f local.yml up
 docker-compose -f local.yml down
+
+### Steps for migrations
+docker-compose -f local.yml run --rm django python manage.py migrate
