@@ -171,6 +171,8 @@ class LostService:
             lost_list_data.append(lost_data)
         data = {
             "total": total,
+            "start": start,
+            "end": len(lost_list_data),
             "data": lost_list_data
         }
         return data
