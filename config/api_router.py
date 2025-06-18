@@ -18,7 +18,8 @@ from mypet.api.views import (
     PostViewSet,
     PostImageViewSet,
     SightingViewSet,
-    LostViewSet
+    LostViewSet,
+    PublicPostViewSet
 )
 
 router = DefaultRouter() if settings.DEBUG else SimpleRouter()
@@ -40,6 +41,7 @@ router.register("post", PostViewSet)
 router.register("post_image", PostImageViewSet)
 router.register("sighting", SightingViewSet)
 router.register("lost", LostViewSet, basename="lost")
+router.register("public_lost", PublicPostViewSet, basename="public_lost")
 
 app_name = "api"
 urlpatterns = router.urls

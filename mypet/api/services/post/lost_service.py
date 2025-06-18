@@ -159,3 +159,18 @@ class LostService:
             lost_list_data.append(lost_data)
 
         return lost_list_data
+
+    def list_all(start=0, end=3):
+        total = Lost.objects.filter(is_active=True).count()
+        lost_instance_list = Lost.objects.filter(is_active=True).order_by("-date")[
+            start:end
+        ]
+        lost_list_data = []
+        for lost_instance in lost_instance_list:
+            lost_data = LostService.get_resume(lost_instance.id)
+            lost_list_data.append(lost_data)
+        data = {
+            "total": total,
+            "data": lost_list_data
+        }
+        return data
